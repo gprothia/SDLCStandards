@@ -8,9 +8,11 @@ cannot merge while the check fails.
   Real secrets live in Secret Manager. Blocks: Trivy secret scan, ruff `S105`/`S106`.
 - SEC-2. No dependency with a **HIGH** or **CRITICAL** vulnerability that has a fix available.
   Blocks: Trivy scan of `requirements.txt` and `package-lock.json`.
-- SEC-3. No container image with a **HIGH** or **CRITICAL** vulnerability that has a fix
-  available. Images are scanned after they are built and before they are pushed, so a
-  vulnerable image never reaches the registry. Blocks: Trivy image scan in the build job.
+- SEC-3. No image we deploy to UAT or production (`services/*`) has a **HIGH** or **CRITICAL**
+  vulnerability that has a fix available. Images are scanned after they are built and before
+  they are pushed, so a vulnerable image never reaches the registry. Blocks: Trivy image scan
+  in the PR build job. (The test-runner image only runs inside test sandboxes; SEC-4 still
+  applies to it.)
 
 ## Containers
 - SEC-4. Every image: starts from a base image with an explicit version (never `latest` or no
