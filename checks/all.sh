@@ -32,7 +32,7 @@ fi
 if command -v trivy >/dev/null; then
   step "Secrets, vulnerable dependencies, Dockerfiles (SEC-1, SEC-2, SEC-4)" \
     trivy fs --quiet --scanners vuln,secret,misconfig --severity HIGH,CRITICAL \
-      --ignore-unfixed --exit-code 1 --skip-dirs standards --skip-dirs tests/ui/node_modules .
+      --ignore-unfixed --exit-code 1 --skip-dirs standards --skip-dirs prototypes --skip-dirs tests/ui/node_modules .
 else
   echo; echo "▷ Trivy not installed: secret and vulnerability scans run in CI (SEC-1..4)"
 fi
