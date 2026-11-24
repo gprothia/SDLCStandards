@@ -1,0 +1,8 @@
+# Who must approve changes to the standards (security.md SEC-12).
+# In a client's GitHub organisation these are teams, e.g. @org/architecture, @org/security, @org/sre.
+*                 @gprothia
+/aaa.md           @gprothia
+/security.md      @gprothia
+/release.md       @gprothia
+/coding.md        @gprothia
+/checks/          @gprothia

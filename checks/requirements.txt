@@ -1,0 +1,2 @@
+# Tools the checks use. Pinned here, so every product repo runs the same versions.
+ruff==0.16.9

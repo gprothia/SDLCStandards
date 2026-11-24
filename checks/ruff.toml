@@ -1,0 +1,26 @@
+# Python style, likely-bug and security rules (coding.md CODE-4, CODE-8; security.md SEC-1, SEC-5).
+# Product repositories use these through a one-line ruff.toml: extend = "standards/checks/ruff.toml".
+# They may add rules there, never remove them. Paths below are relative to this file
+# (standards/checks/), so ../../ is the product repository root.
+line-length = 120
+target-version = "py312"
+extend-exclude = ["../../prototypes"]  # paths are relative to this file, inside the product repo
+
+[lint]
+# E/W style, F real bugs, I import order, B likely bugs, S security (bandit), UP modern syntax,
+# TID banned imports
+select = ["E", "W", "F", "I", "B", "S", "UP", "TID"]
+ignore = [
+  "B008",   # FastAPI's Depends()/Header() in defaults is the framework's documented style
+]
+
+[lint.flake8-tidy-imports.banned-api]
+"requests".msg = "Use httpx with a timeout (CODE-4). requests is approved only as google-auth's transport."
+"urllib.request".msg = "Use httpx with a timeout (CODE-4)."
+"aiohttp".msg = "Use httpx (CODE-4)."
+"flask".msg = "Use FastAPI (CODE-1)."
+"django".msg = "Use FastAPI (CODE-1)."
+"pickle".msg = "Never unpickle data (SEC-5); use JSON."
+
+[lint.per-file-ignores]
+"../../tests/**" = ["S101"]   # assert is how pytest tests check things (path from standards/checks/ to the product repo)
